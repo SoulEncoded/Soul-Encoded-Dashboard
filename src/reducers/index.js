@@ -1,18 +1,17 @@
 import { combineReducers } from 'redux';
-
+import { List, Map } from 'immutable';
 import {
     GET_REPO,
 } from '../actions';
 
-const initialState = {
-    isLoading: true,
-    repos: []
-}
+const initialState = Map({
+    repos: List()
+})
 
 function repos(state = initialState, action) {
     switch (action.type) {
         case GET_REPO:
-            return action.repoName;
+            return state.update('repos', repos => repos.push(action.repoName))
         default:
             return state;
     }

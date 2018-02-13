@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Markdown } from 'react-showdown';
+import { Markdown } from '../../helper/react-shadow';
+import styles from './styles.css';
 import {
     getRepo,
     fetchTableOfContents,
+    fetchContent,
 } from '../../actions';
-var base64 = require('base-64');
+
+
 class Dashboard extends Component {
 
     componentDidMount() {
@@ -13,10 +16,20 @@ class Dashboard extends Component {
     }
 
     render() {
-        var markdown = '# Hello\n\nMore content...';
         return (
-            <div>
-                <Markdown markup={this.props.dashboard.get('tableOfContents')} />
+            <div className="contents-container">
+                <div>
+                    <Markdown
+                        markup={this.props.dashboard.get('tableOfContents')}
+                        action={this.props.getContents}
+                    />
+                </div>
+                <div>
+                    <Markdown
+                        markup={this.props.dashboard.get('content')}
+                        action={() => {}}
+                    />
+                </div> 
             </div>
         );
     }
@@ -25,7 +38,10 @@ class Dashboard extends Component {
 const mapDispatchToProps = (dispatch) => {
     return { 
         getRepo: (repoName) => dispatch(getRepo(repoName)),
-        fetchTableOfContents: () => fetchTableOfContents(dispatch)
+        fetchTableOfContents: () => fetchTableOfContents(dispatch),
+        getContents: (repoName) => (e) => {
+            e.preventDefault();
+            fetchContent(dispatch, repoName)}
     }
 }
 

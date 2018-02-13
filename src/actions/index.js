@@ -1,6 +1,7 @@
 import axios from 'axios';
 export const GET_REPO = 'GET_REPO';
 export const GET_TABLE_OF_CONTENTS = 'GET_TABLE_OF_CONTENTS';
+export const SET_CONTENT = 'SET_CONTENT';
 
 function setTableOfContents(content) {
     return {
@@ -16,9 +17,23 @@ export function getRepo(repoName) {
     }
 }
 
+export function setContent(content) {
+    return {
+        type: SET_CONTENT,
+        content
+    }
+}
+
 export function fetchTableOfContents(dispatch) {
     return axios.get("https://raw.githubusercontent.com/SoulEncoded/TableOfContents/master/README.md").then((res) => {
-        console.log(res)
-        dispatch(setTableOfContents(res.data))
+        dispatch(setTableOfContents(res.data));
+    });
+}
+
+export function fetchContent(dispatch, repoName) {
+    const url = `https://raw.githubusercontent.com/SoulEncoded/${repoName}/master/README.md`
+    return axios.get(url).then((res) => {
+        console.log(res.data)
+        dispatch(setContent(res.data));
     })
 }

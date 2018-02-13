@@ -12,6 +12,7 @@
     "react-redux": "^5.0.6",
     "react-scripts": "1.1.0",
     "react-showdown": "^1.6.0",
+    "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "showdown": "^1.8.6"
   },

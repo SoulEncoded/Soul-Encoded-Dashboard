@@ -18,25 +18,25 @@ class Dashboard extends Component {
     render() {
         return (
             <div className="contents-container">
-                <div>
+                <div className="table-of-contents">
                     <Markdown
                         markup={this.props.dashboard.get('tableOfContents')}
                         action={this.props.getContents}
                     />
                 </div>
-                <div>
+                <div className="content">
                     <Markdown
                         markup={this.props.dashboard.get('content')}
                         action={() => {}}
                     />
-                </div> 
+                </div>
             </div>
         );
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return { 
+    return {
         getRepo: (repoName) => dispatch(getRepo(repoName)),
         fetchTableOfContents: () => fetchTableOfContents(dispatch),
         getContents: (repoName) => (e) => {

@@ -6,7 +6,7 @@ var htmlparser = require('htmlparser2');
 
 /**
  * Forked from react-shadow dom https://github.com/jerolimov/react-showdown
- * 
+ *
  * Example: new Converter(options).convert(markdown)
  *
  * Options will be pushed forward to the showdown converter:

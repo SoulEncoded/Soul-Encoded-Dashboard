@@ -13,6 +13,7 @@ class Dashboard extends Component {
 
     componentDidMount() {
         this.props.fetchTableOfContents();
+        this.props.getContents('Javascript-Introduction-And-Programming')({preventDefault: () =>{}});
     }
 
     render() {

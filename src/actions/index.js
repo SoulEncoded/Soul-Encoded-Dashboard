@@ -17,10 +17,11 @@ export function getRepo(repoName) {
     }
 }
 
-export function setContent(content) {
+export function setContent(content, repoName) {
     return {
         type: SET_CONTENT,
-        content
+        content,
+        repoName
     }
 }
 
@@ -33,7 +34,6 @@ export function fetchTableOfContents(dispatch) {
 export function fetchContent(dispatch, repoName) {
     const url = `https://raw.githubusercontent.com/SoulEncoded/${repoName}/master/README.md`
     return axios.get(url).then((res) => {
-        console.log(res.data)
-        dispatch(setContent(res.data));
+        dispatch(setContent(res.data, repoName));
     })
 }

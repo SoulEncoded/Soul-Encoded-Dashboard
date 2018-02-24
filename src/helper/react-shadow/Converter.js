@@ -18,6 +18,7 @@ var htmlparser = require('htmlparser2');
 module.exports = function Converter(options) {
     'use strict';
     var self = this;
+    this._context = options.contentContex;
     console.log(options)
     this._converter = new showdown.Converter(options);
 
@@ -66,18 +67,16 @@ module.exports = function Converter(options) {
 
             delete element.attribs.markdown;
             var component = this._components[element.name] || element.name;
+            switch (element.name) {
+                case 'a':
+                    return this.handleAnchor(element);
+                    break;
+                case 'img':
+                    return this.handleImg(element);
+                default: 
+                    return React.createElement(component, element.attribs, this._mapElements(element.children));
+            } 
 
-            if (element.name === 'a') {
-                const href = element.attribs.href;
-                const repoName = href.split('SoulEncoded/')[1];
-                return React.createElement(
-                    'a',
-                    {onClick: options.action(repoName)},
-                    this._mapElements(element.children)
-                );
-            } else {
-                return React.createElement(component, element.attribs, this._mapElements(element.children));
-            }
         } else if (element.type === 'text') {
             return element.data;
         } else if (element.type === 'comment') {
@@ -118,4 +117,41 @@ module.exports = function Converter(options) {
             return React.createElement('div', null, reactElements);
         }
     };
+
+    this.handleAnchor = (element) => {
+        let onClick = () => { };
+        let repoName = '';
+        let urlArr = [];
+        const href = element.attribs.href;
+
+        if (href) {
+            urlArr = href.split('SoulEncoded/');
+        }
+
+        if (urlArr.length > 0) {
+            repoName = urlArr[1];
+            onClick = options.action(repoName)
+        }
+
+        return React.createElement(
+            'a',
+            { onClick },
+            this._mapElements(element.children)
+        );
+    }
+
+    this.handleImg = (element) => {
+        if (!element.attribs.src.includes('http')) {
+            const context = this._context;
+            const prefix = `https://github.com/SoulEncoded/${context}/raw/master/`;
+            element.attribs.src = `${prefix}${element.attribs.src}`;
+        }
+        
+        const imgSrc = element.attribs.src
+        return React.createElement(
+            'img',
+            { src: imgSrc },
+            this._mapElements(element.children)
+        );
+    }
 };

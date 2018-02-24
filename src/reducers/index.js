@@ -9,7 +9,8 @@ import {
 const initialState = Map({
     repos: List(),
     tableOfContents: '',
-    content: ''
+    content: '',
+    contentContex: '',
 })
 
 function repos(state = initialState, action) {
@@ -19,7 +20,7 @@ function repos(state = initialState, action) {
         case GET_TABLE_OF_CONTENTS:
             return state.set('tableOfContents', action.content);
         case SET_CONTENT:
-            return state.set('content', action.content);
+            return state.set('content', action.content).set('contentContex', action.repoName);
         default:
             return state;
     }

@@ -22,12 +22,14 @@ class Dashboard extends Component {
                     <Markdown
                         markup={this.props.dashboard.get('tableOfContents')}
                         action={this.props.getContents}
+                        contentContex={this.props.contentContext}
                     />
                 </div>
                 <div className="content">
                     <Markdown
                         markup={this.props.dashboard.get('content')}
                         action={() => {}}
+                        contentContex={this.props.dashboard.get('contentContex')}
                     />
                 </div>
             </div>

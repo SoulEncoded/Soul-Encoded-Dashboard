@@ -19,7 +19,6 @@ module.exports = function Converter(options) {
     'use strict';
     var self = this;
     this._context = options.contentContex;
-    console.log(options)
     this._converter = new showdown.Converter(options);
 
     // remove newlines from table tags
@@ -141,10 +140,12 @@ module.exports = function Converter(options) {
     }
 
     this.handleImg = (element) => {
-        if (!element.attribs.src.includes('http')) {
-            const context = this._context;
-            const prefix = `https://github.com/SoulEncoded/${context}/raw/master/`;
-            element.attribs.src = `${prefix}${element.attribs.src}`;
+        if (element.attribs.src) {
+            if (!element.attribs.src.includes('http')) {
+                const context = this._context;
+                const prefix = `https://github.com/SoulEncoded/${context}/raw/master/`;
+                element.attribs.src = `${prefix}${element.attribs.src}`;
+            }
         }
         
         const imgSrc = element.attribs.src

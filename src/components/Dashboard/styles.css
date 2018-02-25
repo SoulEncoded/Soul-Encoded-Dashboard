@@ -20,28 +20,3 @@
 .content div:first-child {
     max-width: 740px;
 }
-
-.table-of-contents {
-    width: 300px;
-    overflow: scroll;
-    max-height: 100vh;
-    padding-left: 5px;
-}
-
-.table-of-contents h2 {
-    font-size: 15px;
-    margin: 0;
-    padding: 5px 0 5px 0;
-    color: blue;
-}
-
-.table-of-contents ul {
-    list-style-type: none;
-    margin: 0;
-    padding-left: 10px;
-}
-
-.table-of-contents li {
-    padding: 5px 0 5px 0;
-    cursor: pointer;
-}

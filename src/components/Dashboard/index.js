@@ -8,7 +8,7 @@ import {
     fetchContent,
 } from '../../actions';
 
-
+import Sidebar from '../Sidebar';
 class Dashboard extends Component {
 
     componentDidMount() {
@@ -19,13 +19,11 @@ class Dashboard extends Component {
     render() {
         return (
             <div className="contents-container">
-                <div className="table-of-contents">
-                    <Markdown
-                        markup={this.props.dashboard.get('tableOfContents')}
-                        action={this.props.getContents}
-                        contentContex={this.props.contentContext}
-                    />
-                </div>
+                <Sidebar 
+                    markup={this.props.dashboard.get('tableOfContents')}
+                    action={this.props.getContents}
+                    contentContex={this.props.dashboard.get('contentContex')}
+                />
                 <div className="content">
                     <Markdown
                         markup={this.props.dashboard.get('content')}

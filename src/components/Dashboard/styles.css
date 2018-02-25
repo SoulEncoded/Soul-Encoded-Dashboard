@@ -1,9 +1,14 @@
 #root {
     width: 100%;
 }
+.main-content {
+   display: flex;
+   flex-direction: row; 
+}
 
 .contents-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     max-height: 100vh;
 }
@@ -11,12 +16,15 @@
 .content {
     display: flex;
     justify-content: center;
-    overflow-y: scroll;
-    padding: 50px;
     margin-bottom: 50px;
-    width: 80%;
+    overflow-y: scroll;
+    width: 100%;
 }
 
 .content div:first-child {
     max-width: 740px;
+}
+
+.content h1, h2, h3 {
+    color: #315FAF;
 }

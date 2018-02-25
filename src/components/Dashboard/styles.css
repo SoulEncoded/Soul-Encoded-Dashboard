@@ -3,14 +3,22 @@
 }
 
 .contents-container {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
+    max-height: 100vh;
 }
 
 .content {
-  overflow-y: scroll;
-  max-height: 100vh;
-  width: 80%;
+    display: flex;
+    justify-content: center;
+    overflow-y: scroll;
+    padding: 50px;
+    margin-bottom: 50px;
+    width: 80%;
+}
+
+.content div:first-child {
+    max-width: 740px;
 }
 
 .table-of-contents {
